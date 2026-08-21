@@ -1,0 +1,2 @@
+config SHIELD_NINEKEY
+    def_bool $(shields_list_contains,ninekey)
