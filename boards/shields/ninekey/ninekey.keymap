@@ -3,6 +3,17 @@
 #include <dt-bindings/zmk/bt.h>
 
 / {
+    combos {
+        compatible = "zmk,combos";
+
+        // Fixed physical-position shortcut; remains available after Studio remapping.
+        studio_unlock_combo {
+            timeout-ms = <50>;
+            key-positions = <0 2>; // K1 + K3
+            bindings = <&studio_unlock>;
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
@@ -10,7 +21,7 @@
             bindings = <
                 &kp N1  &kp N2  &kp N3
                 &kp N4  &kp N5  &kp N6
-                &kp N7  &kp N8  &bt BT_CLR_ALL
+                &kp N7  &kp N8
             >;
         };
     };
