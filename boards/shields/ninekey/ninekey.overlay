@@ -1,4 +1,6 @@
 #include <dt-bindings/zmk/matrix_transform.h>
+#include <physical_layouts.dtsi>
+#include <behaviors/studio_unlock.dtsi>
 
 
 / {
@@ -30,8 +32,38 @@
         >;
     };
 
+    ninekey_layout: ninekey_layout {
+        compatible = "zmk,physical-layout";
+        display-name = "NineKey (K9 rear)";
+        kscan = <&kscan0>;
+        transform = <&default_transform>;
+
+        // K1-K8 on the front; rear K9 is shown separately to the right.
+        keys = <&key_physical_attrs 100 100   0   0 0 0 0>
+             , <&key_physical_attrs 100 100 100   0 0 0 0>
+             , <&key_physical_attrs 100 100 200   0 0 0 0>
+             , <&key_physical_attrs 100 100   0 100 0 0 0>
+             , <&key_physical_attrs 100 100 100 100 0 0 0>
+             , <&key_physical_attrs 100 100 200 100 0 0 0>
+             , <&key_physical_attrs 100 100   0 200 0 0 0>
+             , <&key_physical_attrs 100 100 200 200 0 0 0>
+             , <&key_physical_attrs 100 100 350 200 0 0 0>
+             ;
+    };
+
+    combos {
+        compatible = "zmk,combos";
+
+        // Press front K1 and K8 together to unlock Studio editing.
+        studio_unlock_combo {
+            timeout-ms = <50>;
+            key-positions = <0 7>;
+            bindings = <&studio_unlock>;
+        };
+    };
+
     chosen {
         zmk,kscan = &kscan0;
-        zmk,matrix-transform = &default_transform;
+        zmk,physical-layout = &ninekey_layout;
     };
 };
